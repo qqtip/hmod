@@ -275,13 +275,18 @@ p.disclaimer {
 	margin: 15px 0;
 	font-size: 9pt;
 }
+p.error-msg {
+	color: red;
+	visibility: hidden;
+}
 </style>
 
 
 
 <h1>Off-Campus Housing Wizard</h1>
 
-<br />
+<p class="error-msg">Please fill out all selections.</p>
+
 
 <form class="radio-budget"">
 	<h4>What is your maximum monthly budget?</h4>
@@ -310,8 +315,29 @@ p.disclaimer {
 
 <p class="disclaimer">This resource is for student convenience. Cal Poly is not affiliated with any rental organizations.</p>
 
-	<input class="wizard-submit" type="submit" value="Submit" onclick="" />
+	<input class="wizard-submit" type="button" value="Submit" onclick="showHousing()" />
 </form>
+
+<script>
+function showHousing() {
+	var budget = jQuery('input:radio[name=budget]:checked').val();
+	var dist = jQuery('input:radio[name=distance]:checked').val()
+	var share = jQuery('input:radio[name=share]:checked').val()
+
+	if (budget == undefined || dist == undefined || share == undefined) {
+		jQuery('p.error-msg').css('visibility', 'visible');
+		return;
+	}
+	else {
+		jQuery('p.error-msg').css('visibility', 'hidden');
+	}
+
+	console.log(budget);
+	console.log(dist);
+	console.log(share);
+}
+
+</script>
 
 
 
