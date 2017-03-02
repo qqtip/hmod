@@ -266,6 +266,9 @@ span.radio-butt.wide {
 span.radio-butt.wider {
 	width: 90px;
 }
+span.radio-butt.line {
+	width: auto;
+}
 input.wizard-submit {
 	font-size: 10pt;
 	width: 100px;
@@ -278,6 +281,12 @@ p.disclaimer {
 p.error-msg {
 	color: red;
 	visibility: hidden;
+}
+div.roommate-gender {
+	display: none;
+}
+div.pet-pref {
+	display: none;
 }
 </style>
 
@@ -312,6 +321,34 @@ p.error-msg {
 	<span class="radio-butt"><input type="radio" name="share" value="y" /> Yes</span>
 	<span class="radio-butt"><input type="radio" name="share" value="n" /> No</span> 
 
+	<br />
+	<br />
+	<h4>Do you have a roommate gender preference?</h4>
+	<span class="radio-butt"><input type="radio" name="gender-q" value="y" /> Yes</span>
+	<span class="radio-butt"><input type="radio" name="gender-q" value="n" /> No</span> 
+	<div class="roommate-gender">
+	<br />
+	<h4>Roommate preference:</h4>
+		<span class="radio-butt"><input type="radio" name="gender" value="y" /> Male</span>
+		<span class="radio-butt wide"><input type="radio" name="gender" value="n" /> Female</span> 
+	</div>
+	<br />
+	<br />
+	<h4>Do you have pet preferences?</h4>
+	<span class="radio-butt"><input type="radio" name="pet-q" value="y" /> Yes</span>
+	<span class="radio-butt"><input type="radio" name="pet-q" value="n" /> No</span> 
+	<div class="pet-pref">
+	<br />
+	<h4>Pet preference:</h4>
+		<span class="radio-butt line"><input type="radio" name="pet" value="y" /> I would like to have a pet</span>
+		<br />
+		<span class="radio-butt line"><input type="radio" name="pet" value="n" /> I would like to have no pets</span> 
+	</div>
+	<br />
+
+
+single quarter
+pets
 
 <p class="disclaimer">This resource is for student convenience. Cal Poly is not affiliated with any rental organizations.</p>
 
@@ -323,8 +360,14 @@ function showHousing() {
 	var budget = jQuery('input:radio[name=budget]:checked').val();
 	var dist = jQuery('input:radio[name=distance]:checked').val()
 	var share = jQuery('input:radio[name=share]:checked').val()
+	var genderq = jQuery('input:radio[name=gender-q]:checked').val()
+	if (genderq == 'y')
+		var gender = jQuery('input:radio[name=gender]:checked').val()
+	var petq = jQuery('input:radio[name=pet-q]:checked').val()
+	if (petq == 'y')
+		var pet = jQuery('input:radio[name=pet]:checked').val()
 
-	if (budget == undefined || dist == undefined || share == undefined) {
+	if (budget == undefined || dist == undefined || share == undefined || genderq == undefined || (genderq = 'y' && gender == undefined) || petq == undefined || (petq == 'y' && pet == undefined)) {
 		jQuery('p.error-msg').css('visibility', 'visible');
 		return;
 	}
@@ -335,8 +378,28 @@ function showHousing() {
 	console.log(budget);
 	console.log(dist);
 	console.log(share);
+	console.log(gender);
 }
 
+jQuery(document).ready(function() {
+	// gender radio listener
+    jQuery('input:radio[name=gender-q]').change(function() {
+        if (this.value == 'y') {
+			jQuery('div.roommate-gender').css('display', 'block');
+        }
+        else if (this.value == 'n') {
+			jQuery('div.roommate-gender').css('display', 'none');
+        }
+    });
+    jQuery('input:radio[name=pet-q]').change(function() {
+        if (this.value == 'y') {
+			jQuery('div.pet-pref').css('display', 'block');
+        }
+        else if (this.value == 'n') {
+			jQuery('div.pet-pref').css('display', 'none');
+        }
+    });
+});
 </script>
 
 
