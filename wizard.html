@@ -288,6 +288,9 @@ div.roommate-gender {
 div.pet-pref {
 	display: none;
 }
+div.time-pref {
+	display: none;
+}
 </style>
 
 
@@ -332,6 +335,7 @@ div.pet-pref {
 		<span class="radio-butt"><input type="radio" name="gender" value="y" /> Male</span>
 		<span class="radio-butt wide"><input type="radio" name="gender" value="n" /> Female</span> 
 	</div>
+	
 	<br />
 	<br />
 	<h4>Do you have pet preferences?</h4>
@@ -344,11 +348,22 @@ div.pet-pref {
 		<br />
 		<span class="radio-butt line"><input type="radio" name="pet" value="n" /> I would like to have no pets</span> 
 	</div>
+
 	<br />
+	<br />
+	<h4>Are you looking for a full-year lease?</h4>
+	<span class="radio-butt"><input type="radio" name="time-q" value="y" /> Yes</span>
+	<span class="radio-butt"><input type="radio" name="time-q" value="n" /> No</span> 
+	<div class="time-pref">
+	<br />
+	<h4>Which quarters do you need housing?</h4>
+		<span class="radio-butt line"><input type="checkbox" name="time" value="f" /> Fall</span>
+		<br />
+		<span class="radio-butt line"><input type="checkbox" name="time" value="w" /> Winter</span>
+		<br />
+		<span class="radio-butt line"><input type="checkbox" name="time" value="s" /> Spring</span>
+	</div>
 
-
-single quarter
-pets
 
 <p class="disclaimer">This resource is for student convenience. Cal Poly is not affiliated with any rental organizations.</p>
 
@@ -366,8 +381,17 @@ function showHousing() {
 	var petq = jQuery('input:radio[name=pet-q]:checked').val()
 	if (petq == 'y')
 		var pet = jQuery('input:radio[name=pet]:checked').val()
+	var timeq = jQuery('input:radio[name=time-q]:checked').val()
+	if (timeq == 'n') {
+		time = ''
+		jQuery('input:checkbox[name=time]:checked').each(function () {
+			time += jQuery(this).val();
+		});
+	}
 
-	if (budget == undefined || dist == undefined || share == undefined || genderq == undefined || (genderq = 'y' && gender == undefined) || petq == undefined || (petq == 'y' && pet == undefined)) {
+
+
+	if (budget == undefined || dist == undefined || share == undefined || genderq == undefined || (genderq = 'y' && gender == undefined) || petq == undefined || (petq == 'y' && pet == undefined) || timeq == undefined || (timeq == 'n' && time == '')) {
 		jQuery('p.error-msg').css('visibility', 'visible');
 		return;
 	}
@@ -379,6 +403,7 @@ function showHousing() {
 	console.log(dist);
 	console.log(share);
 	console.log(gender);
+	console.log(time);
 }
 
 jQuery(document).ready(function() {
@@ -397,6 +422,14 @@ jQuery(document).ready(function() {
         }
         else if (this.value == 'n') {
 			jQuery('div.pet-pref').css('display', 'none');
+        }
+    });
+    jQuery('input:radio[name=time-q]').change(function() {
+        if (this.value == 'n') {
+			jQuery('div.time-pref').css('display', 'block');
+        }
+        else if (this.value == 'y') {
+			jQuery('div.time-pref').css('display', 'none');
         }
     });
 });
