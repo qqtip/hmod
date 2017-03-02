@@ -291,6 +291,9 @@ div.pet-pref {
 div.time-pref {
 	display: none;
 }
+iframe#stuff {
+
+}
 </style>
 
 
@@ -329,6 +332,7 @@ div.time-pref {
 	<h4>Do you have a roommate gender preference?</h4>
 	<span class="radio-butt"><input type="radio" name="gender-q" value="y" /> Yes</span>
 	<span class="radio-butt"><input type="radio" name="gender-q" value="n" /> No</span> 
+		<br />
 	<div class="roommate-gender">
 	<br />
 	<h4>Roommate preference:</h4>
@@ -337,10 +341,10 @@ div.time-pref {
 	</div>
 	
 	<br />
-	<br />
 	<h4>Do you have pet preferences?</h4>
 	<span class="radio-butt"><input type="radio" name="pet-q" value="y" /> Yes</span>
 	<span class="radio-butt"><input type="radio" name="pet-q" value="n" /> No</span> 
+	<br />
 	<div class="pet-pref">
 	<br />
 	<h4>Pet preference:</h4>
@@ -350,18 +354,18 @@ div.time-pref {
 	</div>
 
 	<br />
-	<br />
 	<h4>Are you looking for a full-year lease?</h4>
 	<span class="radio-butt"><input type="radio" name="time-q" value="y" /> Yes</span>
 	<span class="radio-butt"><input type="radio" name="time-q" value="n" /> No</span> 
 	<div class="time-pref">
 	<br />
 	<h4>Which quarters do you need housing?</h4>
+
 		<span class="radio-butt line"><input type="checkbox" name="time" value="f" /> Fall</span>
 		<br />
 		<span class="radio-butt line"><input type="checkbox" name="time" value="w" /> Winter</span>
 		<br />
-		<span class="radio-butt line"><input type="checkbox" name="time" value="s" /> Spring</span>
+		<span class="radio-butt wider"><input type="checkbox" name="time" value="s" /> Spring</span>
 	</div>
 
 
@@ -389,8 +393,6 @@ function showHousing() {
 		});
 	}
 
-
-
 	if (budget == undefined || dist == undefined || share == undefined || genderq == undefined || (genderq = 'y' && gender == undefined) || petq == undefined || (petq == 'y' && pet == undefined) || timeq == undefined || (timeq == 'n' && time == '')) {
 		jQuery('p.error-msg').css('visibility', 'visible');
 		return;
@@ -399,11 +401,7 @@ function showHousing() {
 		jQuery('p.error-msg').css('visibility', 'hidden');
 	}
 
-	console.log(budget);
-	console.log(dist);
-	console.log(share);
-	console.log(gender);
-	console.log(time);
+	window.open("http://www.california-west.com/rentals_slo.php", "_blank");
 }
 
 jQuery(document).ready(function() {
