@@ -395,12 +395,12 @@ function showHousing() {
 
 	if (budget == undefined || dist == undefined || share == undefined || genderq == undefined || (genderq == 'y' && gender == undefined) || petq == undefined || (petq == 'y' && pet == undefined) || timeq == undefined || (timeq == 'n' && time == '')) {
 		jQuery('p.error-msg').css('visibility', 'visible');
-        setTimeout(function() {
-            window.open("listing.html", "_blank");
-        }, 598);
 	}
 	else {
 		jQuery('p.error-msg').css('visibility', 'hidden');
+        setTimeout(function() {
+            window.open("listing.html", "_blank");
+        }, 598);
 	}
 
 }
